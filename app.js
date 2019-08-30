@@ -47,10 +47,12 @@ app.get('/:room/:user', (req, res) => {
 		res.send('[LowChat] Error: Illegal characters present in username. The legal characters are "A-Z", "a-z", and "_".');
 	} else if (/\W/.test(room)) { // Illegal Room Name
 		res.send('[LowChat] Error: Illegal characters present in room name. The legal characters are "A-Z", "a-z", and "_".');
-	} else if (!Object.keys(db.users).find(obj => db.users[obj].room === room && obj === user)) { // New User
-		res.sendFile(__dirname + '/docs/pages/app.html');
 	} else if (Object.keys(db.users).find(obj => db.users[obj].room === room)) { // Duplicate User
 		res.send('[LowChat] Error: The user "' + user + '" already exists in the room. Please try a different username.<br>If you think this is a mistake, refresh the page again.');
+	// } else if (Object.keys(db.users).find(obj => db.users[obj].ip === ip)) { // Duplicate IP as User
+	// 	res.send('[LowChat] Error: The user "' + user + '" already exists in the room. Please try a different username.<br>If you think this is a mistake, refresh the page again.');
+	} else if (!Object.keys(db.users).find(obj => db.users[obj].room === room && obj === user)) { // New User
+		res.sendFile(__dirname + '/docs/pages/app.html');
 	} else {
 		res.status(501).send('[LowChat] Error: The server has encountered an error upon joining the room. Please return to the <a href="/">homepage</a>.');
 	}
