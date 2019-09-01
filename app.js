@@ -27,8 +27,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static('docs'));
 
-http.listen(5500, function () {
-	console.log('listening on *:5500');
+http.listen(80, function () {
+	console.log('listening on *:80');
 });
 
 app.get('/', (req, res) => {
